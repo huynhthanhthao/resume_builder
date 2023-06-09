@@ -14,6 +14,7 @@ class Template extends React.Component<TProps> {
 
     render() {
         const { itemStatus } = this.props;
+
         return (
             <div className={styles.insideCon}>
                 <div>

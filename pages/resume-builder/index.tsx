@@ -9,7 +9,10 @@ import { One } from '@template';
 // import { Text, TopNavbar, WorkExperience, Education, Skills } from '@component';
 import Head from 'next/head';
 // import { TProps, TState } from "./indexType";
+
+import { withRouter, NextRouter } from 'next/router';
 interface TProps {
+    router: NextRouter;
     theme: {
         color: string;
         fontFamily: string;
@@ -29,6 +32,9 @@ class Home extends React.Component<TProps> {
     }
 
     render() {
+        // const { id } = this.props.router.query;
+        // console.log(id);
+
         return (
             <>
                 <Head>
@@ -59,4 +65,5 @@ const mapStateToProps = (store: any) => ({
 
 const mapDispatchToProps = () => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));
+// export default withRouter(Home);
