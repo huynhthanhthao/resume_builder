@@ -3,13 +3,45 @@ import { AppAPI } from '../../lib';
 import Util from '../../lib/Util';
 import AppConfig from '../../constant/config';
 import ApiConst from '../../constant/api';
+import axios from 'axios';
 
 import { appStore } from '../store';
+import { createEmployee, getEmployee } from 'apis/employee';
 
 export const updateUserData = (data) => {
     return {
         type: actionTypes.UPDATE_USER_DATA,
         payload: data,
+    };
+};
+
+export const setData = (data) => {
+    return {
+        type: actionTypes.SET_DATA,
+        payload: data,
+    };
+};
+
+export const addUserData = () => {
+    return (dispatch, getState) => {
+        const userData = getState().userData;
+        const workExperience = getState().workExperience;
+        const education = getState().education;
+        const skills = getState().skills;
+        const theme = getState().theme;
+        const itemStatus = getState().itemStatus;
+
+        let data = [];
+        data = {
+            userData,
+            workExperience,
+            education,
+            skills,
+            theme,
+            itemStatus,
+        };
+
+        return data;
     };
 };
 
@@ -213,4 +245,27 @@ export const uploadImageAction = (image) => {
                     return reject(err);
                 });
         });
+};
+
+export const createUserData = () => {
+    return (dispatch, getState) => {
+        const userData = getState().userData;
+        const workExperience = getState().workExperience;
+        const education = getState().education;
+        const skills = getState().skills;
+        const theme = getState().theme;
+        const itemStatus = getState().itemStatus;
+
+        let data = [];
+        data = {
+            userData,
+            workExperience,
+            education,
+            skills,
+            theme,
+            itemStatus,
+        };
+
+        return data;
+    };
 };

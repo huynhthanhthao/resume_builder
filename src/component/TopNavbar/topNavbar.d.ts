@@ -14,6 +14,7 @@ export interface TProps {
     userData: {
         [key: string]: string;
     };
+    username: string | any;
 }
 export interface TState {
     colorPicker: boolean;

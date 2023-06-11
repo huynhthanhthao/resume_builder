@@ -8,29 +8,46 @@ import { uploadImageAction, updateUserData } from '../../../../redux/core/action
 import { TProps } from './photo';
 
 import styles from './photo.module.scss';
+import { getPhotoUrl } from 'apis/photo';
 
 function Skills(props: TProps) {
     const [modalStatus, setModalStatus] = useState(false);
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
-    const _uploadFile = (e: any) => {
+    const _uploadFile = async (e: any) => {
         setLoading(true);
         setModalStatus(false);
+
         const imageFile = e.target.files[0];
-        const uploadRes: any = dispatch(uploadImageAction(imageFile));
-        uploadRes
-            .then((res: any) => {
-                const data = {
-                    photo: res.data.link,
-                };
-                dispatch(updateUserData(data));
-                setLoading(false);
-            })
-            .catch((err: any) => {
-                console.log(err);
-                setLoading(false);
-            });
+
+        const photo = await getPhotoUrl(imageFile);
+
+        // console.log(URL.createObjectURL(imageFile));
+
+        const data = {
+            photo: photo.url,
+        };
+
+        dispatch(updateUserData(data));
+
+        setLoading(false);
+
+        // const uploadRes: any = dispatch(uploadImageAction(imageFile));
+
+        // uploadRes
+        //     .then((res: any) => {
+        //         const data = {
+        //             photo: res.data.link,
+        //         };
+
+        //         dispatch(updateUserData(data));
+        //         setLoading(false);
+        //     })
+        //     .catch((err: any) => {
+        //         console.log(err);
+        //         setLoading(false);
+        //     });
     };
 
     return (

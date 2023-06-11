@@ -1,29 +1,30 @@
 # WTF Resume (Resume Builder)
 
 Modern real-time design and 100% free resume builder.
-### [https://wtfresume.com](https://wtfresume-sramezani.vercel.app/ "wtfresume")
 
+### [https://wtfresume.com](https://wtfresume-sramezani.vercel.app/ 'wtfresume')
 
-### Simple demo: 
-
+### Simple demo:
 
 ![demo](https://user-images.githubusercontent.com/33284430/86123944-eab5b500-bb0c-11ea-9e6f-f3d156f2eb41.gif)
 
-
 ### Features:
-- Real time design (drag and drop)
-- Build your resume without registration
-- Save as json file and upload and use in future
-- Export as PDF (selectable text)
 
+-   Real time design (drag and drop)
+-   Build your resume without registration
+-   Save as json file and upload and use in future
+-   Export as PDF (selectable text)
 
 ### Run Development Mode
+
 This resume builder created by `React` and `Next js`
-    
+
 ```
 yarn dev
 ```
+
 or
+
 ```
 npm run dev
 ```
@@ -32,7 +33,7 @@ npm run dev
 
     ├── pages                   # site pages (home,resume-builder,...)
     ├── public                  # images and other files
-    ├── src                    
+    ├── src
     │   ├── component           # components
     │   ├── constant            # constant (colors, key, ...)
     │   ├── lib                 # utils, ...
@@ -42,12 +43,17 @@ npm run dev
     │   └── types               # type for typescript
     └── ...
 
-
-
-#### [Go to WTFresume website](https://wtfresume-sramezani.vercel.app/ "wtfresume")
-
+#### [Go to WTFresume website](https://wtfresume-sramezani.vercel.app/ 'wtfresume')
 
 ### Contributing
+
 Yes of course! Welcome :)
 
+### dotev
 
+DB_HOST=localhost
+DB_PASSWORD=
+DB_USERNAME=root
+DB_NAME=resume_builder
+
+### Node v16.13.1

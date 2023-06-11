@@ -97,7 +97,7 @@ class Home extends React.Component<TProps, TState> {
                     )}
 
                     <div className={[styles.container, this.state.exportStatus !== 'true' && styles.previewContainer].join(' ')}>
-                        <One />
+                        <One username="" />
                     </div>
 
                     <Loading show={this.state.gifGenerateStatus} />

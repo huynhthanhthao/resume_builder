@@ -44,6 +44,13 @@ export default function core(state = initialState, action) {
                     ...action.payload,
                 },
             };
+        case actionTypes.SET_DATA:
+            if (!action.payload) return state;
+
+            return {
+                ...state,
+                ...action.payload,
+            };
 
         case actionTypes.UPDATE_THEME:
             if (!action.payload) return state;

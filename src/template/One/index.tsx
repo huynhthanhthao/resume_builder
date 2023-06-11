@@ -7,6 +7,8 @@ import styles from './one.module.scss';
 
 import { TProps } from './one';
 
+// import { getEmployee } from 'apis/employee';
+
 class Template extends React.Component<TProps> {
     constructor(props: TProps) {
         super(props);

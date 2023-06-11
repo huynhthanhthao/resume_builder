@@ -8,12 +8,13 @@ import download from 'downloadjs';
 
 import AppConfig from '../../constant/config';
 import { appStore } from '../../redux/store';
-import { updateTheme, updateItemStatus, exportUserData, importUserData } from '../../redux/core/actions';
+import { updateTheme, updateItemStatus, exportUserData, importUserData, createUserData } from '../../redux/core/actions';
 import { Loading } from '@component';
 
 import styles from './topNavbar.module.scss';
 
 import { TProps, TState } from './topNavbar';
+import { createEmployee, formatUsername } from 'apis/employee';
 
 class TopNavbar extends React.Component<TProps, TState> {
     constructor(props: TProps) {
@@ -113,19 +114,27 @@ class TopNavbar extends React.Component<TProps, TState> {
     };
 
     _saveBtnPress = async () => {
-        const { userData } = this.props;
+        this.setState({ gifGenerateStatus: true });
 
-        const data = appStore.dispatch(exportUserData());
-        const fileName = `CV-${userData.name}`;
-        const json = JSON.stringify(data);
-        const blob = new Blob([json], { type: 'application/json' });
-        const href = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = href;
-        link.download = fileName + '.json';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        const username = this.props.userData.name ? formatUsername(this.props.userData.name).trim() : this.props.userData.name;
+
+        const data = { ...appStore.dispatch(createUserData()), username };
+
+        await createEmployee(data);
+
+        this.setState({ gifGenerateStatus: false });
+
+        // const data = appStore.dispatch(exportUserData());
+        // const fileName = `CV-${userData.name}`;
+        // const json = JSON.stringify(data);
+        // const blob = new Blob([json], { type: 'application/json' });
+        // const href = URL.createObjectURL(blob);
+        // const link = document.createElement('a');
+        // link.href = href;
+        // link.download = fileName + '.json';
+        // document.body.appendChild(link);
+        // link.click();
+        // document.body.removeChild(link);
     };
 
     _switchBtn = (name: string) => {
@@ -273,6 +282,7 @@ class TopNavbar extends React.Component<TProps, TState> {
     render() {
         const { theme } = this.props;
         const { bgComplete } = this.state;
+
         return (
             <>
                 {bgComplete && <div className={styles.bgComplete} onClick={this._bgPress} />}

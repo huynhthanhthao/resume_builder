@@ -22,4 +22,5 @@ export interface TProps {
     itemStatus: {
         [key: string]: boolean;
     };
+    username: any;
 }
