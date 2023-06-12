@@ -1,8 +1,10 @@
 import axios from 'axios';
 const Diacritics = require('diacritic');
-export const getEmployee = async (username: string | any) => {
+export const getEmployee = async (id: string | any) => {
     try {
-        const res = await axios.get(`/api/employee`, { params: { username } });
+        console.log(id);
+
+        const res = await axios.get(`/api/employee`, { params: { id } });
         return res.data ?? {};
     } catch (error) {
         console.log(error);
@@ -14,7 +16,7 @@ export const createEmployee = async (params: any) => {
         const data = await axios.post(
             `/api/employee`,
             {
-                username: params.username,
+                name: params.name,
                 userData: params,
             },
             {

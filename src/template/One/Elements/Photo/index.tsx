@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { Loading } from '@component';
 
-import { uploadImageAction, updateUserData } from '../../../../redux/core/actions';
+import { updateUserData } from '../../../../redux/core/actions';
 import { TProps } from './photo';
 
 import styles from './photo.module.scss';
@@ -21,12 +21,13 @@ function Skills(props: TProps) {
 
         const imageFile = e.target.files[0];
 
-        const photo = await getPhotoUrl(imageFile);
+        const formData = new FormData();
+        formData.append('photo', imageFile);
 
-        // console.log(URL.createObjectURL(imageFile));
+        const photo = await getPhotoUrl(formData);
 
         const data = {
-            photo: photo.url,
+            photo: photo,
         };
 
         dispatch(updateUserData(data));

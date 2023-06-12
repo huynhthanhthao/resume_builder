@@ -116,9 +116,7 @@ class TopNavbar extends React.Component<TProps, TState> {
     _saveBtnPress = async () => {
         this.setState({ gifGenerateStatus: true });
 
-        const username = this.props.userData.name ? formatUsername(this.props.userData.name).trim() : this.props.userData.name;
-
-        const data = { ...appStore.dispatch(createUserData()), username };
+        const data = { ...appStore.dispatch(createUserData()), name: this.props.userData.name };
 
         await createEmployee(data);
 

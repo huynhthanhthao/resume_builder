@@ -11,7 +11,7 @@ export const connection = mysql.createConnection({
 export default async function handler(req, res) {
     try {
         if (req.method === 'GET') {
-            const { username } = req.query;
+            const { id } = req.query;
 
             connection.query('USE resume_builder', function (err, results) {
                 if (err) {
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
                     return res.status(500).send('Error selecting database');
                 }
 
-                connection.execute(`SELECT * FROM employee WHERE username = ?`, [username || ''], function (err, results, fields) {
+                connection.execute(`SELECT * FROM employee WHERE id = ?`, [id || 0], function (err, results, fields) {
                     if (err) {
                         console.error(err);
                         return res.status(500).send('Error executing query');
@@ -31,8 +31,8 @@ export default async function handler(req, res) {
         }
 
         if (req.method === 'POST') {
-            const { username, userData } = req.body;
-            if (!username) {
+            const { name, userData } = req.body;
+            if (!name) {
                 return res.status(500).send('Error');
             }
 
@@ -43,8 +43,8 @@ export default async function handler(req, res) {
                 }
 
                 connection.execute(
-                    'INSERT INTO employee (username, userData) VALUES (?, ?) ' + 'ON DUPLICATE KEY UPDATE userData = ?',
-                    [username, JSON.stringify(userData), JSON.stringify(userData)],
+                    'INSERT INTO employee (name, userData) VALUES (?, ?) ' + 'ON DUPLICATE KEY UPDATE userData = ?',
+                    [name, JSON.stringify(userData), JSON.stringify(userData)],
                     function (err, results, fields) {
                         if (err) {
                             console.error(err);

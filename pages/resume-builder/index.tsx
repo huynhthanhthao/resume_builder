@@ -12,11 +12,11 @@ import { getEmployee } from 'apis/employee';
 const Home = (props: any) => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const { username } = router.query;
+    const { id } = router.query;
 
     useEffect(() => {
         const data = async () => {
-            const response: any = await getEmployee(username);
+            const response: any = await getEmployee(id);
 
             dispatch(setData(response));
         };
@@ -33,10 +33,10 @@ const Home = (props: any) => {
                     <div className={styles.loading_gradient}></div>
                 </div>
 
-                <TopNavbar itemStatus={props.itemStatus} theme={props.theme} userData={props.userData} username={router.query.username} />
+                <TopNavbar itemStatus={props.itemStatus} theme={props.theme} userData={props.userData} id={router.query.id} />
 
                 <div className={styles.container}>
-                    <One username={router.query.username} />
+                    <One id={router.query.id} />
                 </div>
             </div>
             <Footer />
